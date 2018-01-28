@@ -1,0 +1,9 @@
+{% load staticfiles %}
+{% include 'partials/header.html' %}
+<ul>
+	{% for post in posts %}
+	<li>Title: {{post.title}} <br> Author: {{post.author}} <br> Text: {{post.body}}</li> <br>
+	{% endfor %}
+</ul>
+
+{% include 'partials/footer.html' %}
