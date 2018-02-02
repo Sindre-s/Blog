@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .models import Post
-from .forms import PostForm
-#from django.contrib.auth.decorators import login_required
+from .forms import PostForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -36,7 +36,7 @@ def create_blog(request):
 				'users':users
 		}
 		return render(request, 'blog/create_blog.html', user)
-#@login_required		
+@login_required		
 def post_new(request):
 	if request.method == "POST":
 		form = PostForm(request.POST)
@@ -53,7 +53,8 @@ def post_new(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
-    
+ 
+@login_required   
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -67,4 +68,17 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+def add_comment_to_post(request, pk):
+	post = get_object_or_404(Post, pk=pk)
+	if request.method == "POST":
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.post = post
+			comment.save()
+			return redirect('post_detail', pk=post.pk)
+	else:
+		form = CommentForm()
+	return render(request, 'blog/add_comment_to_post.html', {'form' : form})
 
