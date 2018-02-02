@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -37,4 +38,8 @@ def create_blog(request):
 def post_new(request):
     form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+    
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 
