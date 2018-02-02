@@ -33,4 +33,8 @@ def create_blog(request):
 				'users':users
 		}
 		return render(request, 'blog/create_blog.html', user)
+@login_required		
+def post_new(request):
+    form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
 
