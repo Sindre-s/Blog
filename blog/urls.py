@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'post$',views.post_list),
 	url(r'create_blog$',views.create_blog, name='create_blog'),
 	url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
+	url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
 	url(r'^post/new/$', views.post_new, name='post_new'),
 #	url(r'^accounts/login/$', views.login, name='login')
 ]
