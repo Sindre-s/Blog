@@ -37,11 +37,11 @@ h1, h2, h3, h4 {
 .top-menu, .top-menu:hover, .top-menu:visited {
     color: #000000;
     float: right;
-<<<<<<< HEAD
+
     font-size: 18pt;
-=======
+
     font-size: 26pt;
->>>>>>> Development
+
     margin-right: 20px;
 }
 .post {
@@ -51,4 +51,3 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
-
